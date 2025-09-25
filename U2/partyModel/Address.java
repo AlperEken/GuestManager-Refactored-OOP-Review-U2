@@ -5,14 +5,25 @@ public class Address {
       and country by using the enum Countries
     */
 
+    private String street;
+    private String city;
+    private String zipcode;
+    private Countries country;
+
   /* Write a default constructor (with no parameters) that gives default values for instance variables.
      Set default values for instance variables by calling the other constructor
-     below using the this reserved word and:
+     below using the "this" reserved word and:
      - Alternative 1: with arguments that are default values
        of your choice that will inform a user that this value isn't really set.
      - Alternative 2: Use null for all arguments and call the constructor below and handle that there.
    */
 
+    public Address(){
+        this.street = "Street";
+        this.city = "City";
+        this.zipcode = "12345";
+        this.country = Countries.Unknown;
+    }
 
   /* Write a constructor with parameters for all instance variables
      given above. Set instance variables to values from parameters.
@@ -27,14 +38,76 @@ public class Address {
      If the parameter country is null set this to Countries.Unknown
    */
 
+    public Address(String street, String city, String zipcode, Countries country){
+        if (street != null && !street.isEmpty()){
+            this.street = street;
+        } else {
+            this.street = "Empty";
+        }
+
+        if (city != null && !city.isEmpty()){
+            this.city = city;
+        } else {
+            this.city = "Empty";
+        }
+
+        if (zipcode != null && !zipcode.isEmpty()){
+            this.zipcode = zipcode;
+        } else {
+            this.zipcode = "Empty";
+        }
+
+        if (country != null && !country.equals(Countries.Unknown)){
+            this.country = country;
+        } else {
+            this.country = Countries.Unknown;
+        }
+    }
+
 
   /* Implement get- and set-methods for all instance variables.
      Remember to check parameters in set-methods with the same
      rules as in the constructor above.
    */
 
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public Countries getCountry() {
+        return country;
+    }
+
+    public void setCountry(Countries country) {
+        this.country = country;
+    }
+
+
   /* Write a toString method to return a String-object made of the address details,
      formatted as one line (this will be shown in the window under "Guest Register" ).
    */
 
+    public String toString(){
+        return "iAddress" + street + " " + city + " " + zipcode + " " + country;
+    }
 }

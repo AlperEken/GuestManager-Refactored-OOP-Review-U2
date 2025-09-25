@@ -24,6 +24,8 @@ public class Controller {
     MainFrame view; // the main association to the GUI from the controller-class, GUI classes are in package partyView
     GuestManager register;  //class GuestManager is in package partyModel
 
+    int maxGuestsNumber; //The number of maximum number of guests that will attend.
+
     //constructor called from MainProgram
     public Controller(int maxNbrOfGuests) {
         //Creates a GuestManager-object referenced by the instance variable register
@@ -37,6 +39,8 @@ public class Controller {
 
         //Set some values in the fields to the left in the GUI
         setDefaultValuesInView();
+
+        maxGuestsNumber = maxNbrOfGuests;
     }
 
     /* This method is called from the GUI-classes when a button is pressed.
@@ -54,19 +58,40 @@ public class Controller {
                    left in the GUI "Guest Information" and display that in the prompt for show.
                    You can delete this example code later.
                 */
+
+                String firstName = view.getFirstNameText();
+                String lastName = view.getLastNameText();
+                String street = view.getStreetText();
+                String zipcode = view.getZipCodeText();
+                String city = view.getCityText();
+
+
+                /* testing
                 System.out.println("First name: "+view.getFirstNameText());
                 System.out.println("Last name: "+view.getLastNameText());
                 System.out.println("Age: "+view.getAgeText());
                 System.out.println("Street: "+view.getStreetText());
                 System.out.println("Zip code: "+view.getZipCodeText());
                 System.out.println("City: "+view.getCityText());
+                */
 
                 Object item = view.getCountriesItem(); //get the item chosen in the drop-down list of countries, the program handles this as just an Object-object
                 Countries country = (Countries) item; //make it a Countries object - we know that this is supposed to be that, this type of type conversion can be risky
+                /*
                 System.out.println("Country: "+country.toString());
+                 */
+
+
+
+
+
+
 
                 int age = convertAge(view.getAgeText()); //get the text from interface for age and convert to int
-                // example code end here
+
+
+                register.newGuest(firstName, lastName, age, street, zipcode, city, country);
+
 
                 /* ADD CODE HERE to add a guest to the list in the GuestManager-object
                    referenced by instance variable register. Use a method in GuestManager
@@ -108,8 +133,8 @@ public class Controller {
                 break;
             case Statistics:
                 JOptionPane.showMessageDialog(null, "Pressed Statistics"); //remove this line later when you understand how the code works
-                JOptionPane.showMessageDialog(null, register.getStatistics()); 
-            break;
+                JOptionPane.showMessageDialog(null, register.getStatistics());
+                break;
         }
 
         /* Update information i GUI after changes.
@@ -188,7 +213,7 @@ public class Controller {
         return ok;
     }
 
-    /* This method uses try-catch to convert a String to an int. 
+    /* This method uses try-catch to convert a String to an int.
        If the string is not a numeric value the value 0 will be returned.
      */
     private int convertAge(String ageText){
@@ -212,6 +237,12 @@ public class Controller {
         view.setZipCodeText("zip code");
         view.setCityText("City");
         view.setCountriesItem(Countries.Unknown);
+    }
+
+    /* Returns the maximum number of guests that will attend.
+     */
+    public int getMaxGuestsNumber(){
+        return maxGuestsNumber;
     }
 
 }

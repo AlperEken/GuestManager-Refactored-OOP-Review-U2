@@ -1,14 +1,26 @@
 package partyController;
 
+import javax.swing.*;
+
 public class MainProgram
 {
     public static void main(String[] args)
     {
-        int maxNbrOfGuests = 10; // Change this line later. Only using 10 as a default value to make compilations possible.
-        /* Write code to read the number of guests to start with from the user by using one of
-         - JOptionPane
-         - Scanner and prompt
-        */
+        boolean rightFormat = false;
+        int maxNbrOfGuests = 0;
+
+        do {
+
+            try {
+                String maxNbrOfGuestsString = JOptionPane.showInputDialog(null, "How many guests will attend?");
+                maxNbrOfGuests = Integer.parseInt(maxNbrOfGuestsString);
+                rightFormat = true;
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null,"You need to enter a number!");
+            }
+        } while (!rightFormat);
+
+
 
         Controller controller = new Controller(maxNbrOfGuests);
     }

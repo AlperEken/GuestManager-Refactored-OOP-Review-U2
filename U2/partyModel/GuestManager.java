@@ -1,5 +1,10 @@
 package partyModel;
 
+import partyController.Controller;
+
+import javax.swing.*;
+import java.util.Scanner;
+
 public class GuestManager {
   /* Keep ONLY the following instance variables for the class:
      - number of guests currently stored in the list/array
@@ -7,8 +12,10 @@ public class GuestManager {
      - one array for the list with guests where
        the guests are objects of class Guest
   */
-  private int nbrOfGuests = 0;
-  private Guest[] guestList;
+  private int nbrOfGuests = 0; //Hur många gäster som finns för tillfället!
+  private Guest[] guestList; //Lista över alla gäster!
+
+  private Controller controller;
 
   /* Create a constructor with one parameter which is
      the max number of elements (guests) in the list/array.
@@ -18,13 +25,26 @@ public class GuestManager {
      until you get a value that is larger than 0.
    */
   public GuestManager(int maxNbrOfGuests){
-    System.out.println("Called constructor for GuestManager"); //You can remove this line if you want to
-    //Add more code according to description above
 
+    boolean done = false;
+
+    if (maxNbrOfGuests <= 0){
+      while (!done){
+        JOptionPane.showMessageDialog(null, "You need to enter a number higher than 0!");
+        try {
+          String maxNbrOfGuestsString = JOptionPane.showInputDialog(null, "Enter the number of guests that shall attend");
+          maxNbrOfGuests = Integer.parseInt(maxNbrOfGuestsString);
+        } catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(null, "Enter a NUMBER higher than 0!");
+          break;
+        }
+        done = true;
+      }
+    }
   }
 
   /* A method that returns the number of guests stored in
-     the guest list.
+     the guest list RIGHT NOW.
    */
   public int getNbrOfGuests(){
     return nbrOfGuests;
@@ -40,6 +60,40 @@ public class GuestManager {
      of the array and then add the new Guest-object. Do not forget to update the value
      of the instance variable for number of guests in the list.
    */
+
+  /* Så basically, to create a method that adds a new guest by creating a guest-object
+     and let the address and guest classes handle them with the constructors using parameters.
+
+     Add the guest to the first empty place. If no place, increase the size of the array and
+     make room for one more. ALSO update the variable of value the number of guests and GUI.
+   */
+
+  public void newGuest(String firstName, String lastName, int age, String street, String zipcode, String city, Countries country){
+    int maxGuestsNumber = controller.getMaxGuestsNumber();
+
+    nbrOfGuests++;
+
+    if (nbrOfGuests <= maxGuestsNumber && nbrOfGuests == maxGuestsNumber){
+
+      for (int i = 0; i < nbrOfGuests; i++){
+        if (guestList[i] == null) {
+          guestList[i] = new Guest(firstName, lastName, age, street, city, zipcode, country );
+          JOptionPane.showMessageDialog(null, "Hello " + firstName + ", your have been added successfully!");
+          break;
+        }
+      }
+      new Guest(firstName, lastName, age, street, city, zipcode, country );
+    } else if (nbrOfGuests > maxGuestsNumber){
+      // Increase the size of the array if no empty place exists.
+      increaseGuestList();
+      guestList[nbrOfGuests] = new Guest(firstName, lastName, age, street, city, zipcode, country );
+    } else {
+      JOptionPane.showMessageDialog(null, "A new guest could not be added, try again later!");
+    }
+    // done for now!
+  }
+
+
 
   /* Create method to delete a guest by giving the index in the array
      for the object (guest) to delete as a parameter to the method.
@@ -63,13 +117,22 @@ public class GuestManager {
 
   private void increaseGuestList(){
     /* Write code that creates a new array of Guest-objects
-       that is 10 elements larger that the current array instance variable .
+       thart is 10 elements large that the current array instance variable .
 
        Copy the current array to the larger array and after that is done
        point the instance variable to the new array.
 
        You are not allowed to take a shortcut by using class Array or similar from a Java-library.
      */
+
+    Guest temp[] = new Guest[guestList.length + 10];
+
+    for (int i = 0; i < guestList.length; i++){
+      temp[i] = guestList[i];
+    }
+
+    guestList = temp;
+
   }
 
   /* A method that returns the Guest-object at the given
@@ -121,7 +184,7 @@ public class GuestManager {
             "Number of children: 2 \n"+
             "Oldest guest: Fake Name of age 100 \n"+
             "Youngest guest: Bogus Name of age 7");
-  
+
   }
 
 }
