@@ -25,7 +25,6 @@ public class GuestManager {
      until you get a value that is larger than 0.
    */
   public GuestManager(int maxNbrOfGuests){
-
     boolean done = false;
 
     if (maxNbrOfGuests <= 0){
@@ -41,6 +40,7 @@ public class GuestManager {
         done = true;
       }
     }
+    guestList = new Guest[maxNbrOfGuests];
   }
 
   /* A method that returns the number of guests stored in
@@ -73,7 +73,7 @@ public class GuestManager {
 
     nbrOfGuests++;
 
-    if (nbrOfGuests <= maxGuestsNumber && nbrOfGuests == maxGuestsNumber){
+    if (nbrOfGuests <= maxGuestsNumber || nbrOfGuests == maxGuestsNumber){
 
       for (int i = 0; i < nbrOfGuests; i++){
         if (guestList[i] == null) {
@@ -94,7 +94,6 @@ public class GuestManager {
   }
 
 
-
   /* Create method to delete a guest by giving the index in the array
      for the object (guest) to delete as a parameter to the method.
      This method should call the private method moveElementsToLeft to remove
@@ -105,6 +104,22 @@ public class GuestManager {
    */
 
 
+  /* A guest should be deleted by index. This methods calls "moveElementsToLeft" to remove empty spaces
+     within the array, however not necessary when last in array. Update the number of guests!
+   */
+  public void removeGuest(int index){
+
+    //Få ett sätt att få in gästlistan här?
+
+
+    guestList[index] = null;
+
+    moveElementsToLeft(index);
+
+    nbrOfGuests--;
+
+  }
+
   private void moveElementsToLeft(int index){
         /* Add code to remove empty element places that
            is not att the end of the array. Start at
@@ -113,6 +128,21 @@ public class GuestManager {
 
            You are not allowed to take a shortcut by using class Array or similar from a Java-library.
          */
+
+    Guest temp2[] = new Guest[1];
+
+    for (int i = index; i <= nbrOfGuests; i++){
+      if (guestList[++index] != null){
+
+        temp2[0] = guestList[index];
+
+        guestList[--index] = guestList[++index];
+
+        guestList[--index] = temp2[0];
+      }
+
+    }
+
   }
 
   private void increaseGuestList(){
@@ -186,5 +216,15 @@ public class GuestManager {
             "Youngest guest: Bogus Name of age 7");
 
   }
+
+  public void setController(Controller controller) {
+    this.controller = controller;
+  }
+
+  public void setGuestList(){
+
+    this.guestList = guestList;
+  }
+
 
 }

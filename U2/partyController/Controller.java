@@ -30,6 +30,7 @@ public class Controller {
     public Controller(int maxNbrOfGuests) {
         //Creates a GuestManager-object referenced by the instance variable register
         register = new GuestManager(maxNbrOfGuests);
+        register.setController(this);
 
         // Create main GUI-object referenced by the instance variable view
         view = new MainFrame(this); // give the GUI a reference to the Controller-object by using this to send a reference to the Controller-object
@@ -100,7 +101,7 @@ public class Controller {
                  */
                 break;
 
-            case Change:
+            case Change://Återkommer till denna
                 JOptionPane.showMessageDialog(null, "Pressed Change"); //remove this line later when you understand how the code works
 
                 index = view.getListIndex(); //get the chosen index from the list of guest information from the GUI
@@ -124,8 +125,11 @@ public class Controller {
             case Delete:
                 JOptionPane.showMessageDialog(null, "Pressed Delete"); //remove this line later when you understand how the code works
                 index = view.getListIndex();
-                System.out.println("When pressed delete we got index: "+index); //Can be removed later
-                if (validateIndex(index)) {
+                System.out.println("When pressed delete we got index: " + ++index); //Can be removed later
+                if (validateIndex(--index)) {
+
+                    register.removeGuest(index);
+
                     /*
                      ADD CODE HERE that calls the method to delete an item for the GuestManager-object register
                     */
@@ -244,5 +248,8 @@ public class Controller {
     public int getMaxGuestsNumber(){
         return maxGuestsNumber;
     }
+
+//    public Guest entireGuestList(){
+//    }
 
 }
