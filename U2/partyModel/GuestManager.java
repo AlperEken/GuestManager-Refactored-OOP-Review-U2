@@ -117,7 +117,7 @@ public class GuestManager {
 
   private void increaseGuestList(){
     /* Write code that creates a new array of Guest-objects
-       thart is 10 elements large that the current array instance variable .
+       that is 10 elements large that the current array instance variable .
 
        Copy the current array to the larger array and after that is done
        point the instance variable to the new array.
