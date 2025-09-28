@@ -192,11 +192,16 @@ public class GuestManager {
        (no strings should be created for empty places at the end of the array st)
     */
     String[] infoStrings = new String[nbrOfGuests];
+    
+      try {
+          for(int i = 0; i < nbrOfGuests; i++){
+            infoStrings[i] = guestList[i].toString();
+          }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Sorry, you could not be added! Try again later");
+      }
 
-    for(int i = 0; i < nbrOfGuests; i++){
-      infoStrings[i] = guestList[i].toString();
-    }
-    return infoStrings;
+      return infoStrings;
   }
 
   public String getStatistics(){
