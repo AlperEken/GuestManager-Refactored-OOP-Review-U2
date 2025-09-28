@@ -71,28 +71,30 @@ public class GuestManager {
   public void newGuest(String firstName, String lastName, int age, String street, String zipcode, String city, Countries country){
     int maxGuestsNumber = controller.getMaxGuestsNumber();
 
-    nbrOfGuests++;
+    if (nbrOfGuests == 0) {
+        guestList[0] = new Guest(firstName, lastName, age, street, zipcode, city, country);
+        nbrOfGuests++;
+        JOptionPane.showMessageDialog(null, "Hello " + firstName + ", your have been added successfully!");
+        return;
+      }
 
-    if (nbrOfGuests <= maxGuestsNumber || nbrOfGuests == maxGuestsNumber){
-
-      for (int i = 0; i < nbrOfGuests; i++){
+    if (nbrOfGuests < maxGuestsNumber){
+      for (int i = 0; i < guestList.length; i++){
         if (guestList[i] == null) {
           guestList[i] = new Guest(firstName, lastName, age, street, city, zipcode, country );
+          nbrOfGuests++;
           JOptionPane.showMessageDialog(null, "Hello " + firstName + ", your have been added successfully!");
-          break;
+          return;
         }
       }
-      new Guest(firstName, lastName, age, street, city, zipcode, country );
-    } else if (nbrOfGuests > maxGuestsNumber){
-      // Increase the size of the array if no empty place exists.
-      increaseGuestList();
-      guestList[nbrOfGuests] = new Guest(firstName, lastName, age, street, city, zipcode, country );
-    } else {
-      JOptionPane.showMessageDialog(null, "A new guest could not be added, try again later!");
     }
 
-    // Måste uppdatera panelen med nya gästen.
-    // done for now!
+    if (nbrOfGuests >= maxGuestsNumber){
+      increaseGuestList();
+      guestList[nbrOfGuests] = new Guest(firstName, lastName, age, street, city, zipcode, country );
+      nbrOfGuests++;
+      JOptionPane.showMessageDialog(null, "Hello " + firstName + ", you have been added successfully after expanding the list!");
+    }
   }
 
 
@@ -116,11 +118,12 @@ public class GuestManager {
 
     guestList[index] = null;
 
+    nbrOfGuests--;
+
     if (index != nbrOfGuests-1){
       moveElementsToLeft(index);
     }
 
-    nbrOfGuests--;
 
   }
 
@@ -184,16 +187,16 @@ public class GuestManager {
        number of guests currently stored in the list.
        (no strings should be created for empty places at the end of the array st)
     */
+
+    if (nbrOfGuests == 0){
+      return new String[0];
+    }
+
     String[] infoStrings = new String[nbrOfGuests];
 
-      try {
-          for(int i = 0; i < nbrOfGuests; i++){
-            infoStrings[i] = guestList[i].toString();
-          }
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Sorry, you could not be added! Try again later");
-      }
-
+    for(int i = 0; i < nbrOfGuests; i++){
+        infoStrings[i] = guestList[i].toString();
+    }
       return infoStrings;
   }
 
