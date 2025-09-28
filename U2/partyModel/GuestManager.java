@@ -116,7 +116,9 @@ public class GuestManager {
 
     guestList[index] = null;
 
-    moveElementsToLeft(index);
+    if (index != nbrOfGuests-1){
+      moveElementsToLeft(index);
+    }
 
     nbrOfGuests--;
 
@@ -131,20 +133,11 @@ public class GuestManager {
            You are not allowed to take a shortcut by using class Array or similar from a Java-library.
          */
 
-    Guest temp2[] = new Guest[1];
-
-    for (int i = index; i <= nbrOfGuests; i++){
-      if (guestList[++index] != null){
-
-        temp2[0] = guestList[index];
-
-        guestList[--index] = guestList[++index];
-
-        guestList[--index] = temp2[0];
+    for (int i = index; i < nbrOfGuests-1; i++){
+        guestList[i] = guestList[i+1];
       }
 
-    }
-
+    guestList[nbrOfGuests-1] = null;
   }
 
   private void increaseGuestList(){
@@ -192,7 +185,7 @@ public class GuestManager {
        (no strings should be created for empty places at the end of the array st)
     */
     String[] infoStrings = new String[nbrOfGuests];
-    
+
       try {
           for(int i = 0; i < nbrOfGuests; i++){
             infoStrings[i] = guestList[i].toString();
