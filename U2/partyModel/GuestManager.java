@@ -90,6 +90,8 @@ public class GuestManager {
     } else {
       JOptionPane.showMessageDialog(null, "A new guest could not be added, try again later!");
     }
+
+    // Måste uppdatera panelen med nya gästen.
     // done for now!
   }
 
@@ -180,7 +182,7 @@ public class GuestManager {
     return null;
   }
 
-  public String[] getInfoStrings() {
+  public String[] getInfoStrings() { // Färdig implementerad metod!
     /* Write code that returns an array of strings where each element
        represents information about one guest in the list by calling every
        Guest-object's toString method.
@@ -189,9 +191,11 @@ public class GuestManager {
        number of guests currently stored in the list.
        (no strings should be created for empty places at the end of the array st)
     */
+    String[] infoStrings = new String[nbrOfGuests];
 
-    String[] infoStrings = {"Person 1", "Person 2", "Person 3"}; //Change this to construct an array of String-objects as above
-
+    for(int i = 0; i < nbrOfGuests; i++){
+      infoStrings[i] = guestList[i].toString();
+    }
     return infoStrings;
   }
 

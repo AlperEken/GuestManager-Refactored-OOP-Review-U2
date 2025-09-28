@@ -249,7 +249,6 @@ public class Controller {
         return maxGuestsNumber;
     }
 
-//    public Guest entireGuestList(){
-//    }
+
 
 }
