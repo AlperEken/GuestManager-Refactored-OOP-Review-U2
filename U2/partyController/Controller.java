@@ -249,6 +249,10 @@ public class Controller {
         return maxGuestsNumber;
     }
 
+    public void increaseMaxGuestsNumber(){
+        maxGuestsNumber += 10;
+    }
+
 
 
 }

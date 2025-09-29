@@ -90,6 +90,7 @@ public class GuestManager {
     }
 
     if (nbrOfGuests >= maxGuestsNumber){
+      controller.increaseMaxGuestsNumber();
       increaseGuestList();
       guestList[nbrOfGuests] = new Guest(firstName, lastName, age, street, city, zipcode, country );
       nbrOfGuests++;
@@ -120,7 +121,7 @@ public class GuestManager {
 
     nbrOfGuests--;
 
-    if (index != nbrOfGuests-1){
+    if (index != controller.getMaxGuestsNumber()-1){
       moveElementsToLeft(index);
     }
 
@@ -152,6 +153,8 @@ public class GuestManager {
 
        You are not allowed to take a shortcut by using class Array or similar from a Java-library.
      */
+
+    System.out.println("Gästlistan ökades med 10!");
 
     Guest temp[] = new Guest[guestList.length + 10];
 
