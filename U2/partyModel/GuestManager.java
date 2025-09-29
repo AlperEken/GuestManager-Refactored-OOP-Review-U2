@@ -113,10 +113,6 @@ public class GuestManager {
      within the array, however not necessary when last in array. Update the number of guests!
    */
   public void removeGuest(int index){
-
-    //Få ett sätt att få in gästlistan här?
-
-
     guestList[index] = null;
 
     nbrOfGuests--;
@@ -124,8 +120,6 @@ public class GuestManager {
     if (index != controller.getMaxGuestsNumber()-1){
       moveElementsToLeft(index);
     }
-
-
   }
 
   private void moveElementsToLeft(int index){
@@ -230,7 +224,6 @@ public class GuestManager {
   }
 
   public void setGuestList(){
-
     this.guestList = guestList;
   }
 
