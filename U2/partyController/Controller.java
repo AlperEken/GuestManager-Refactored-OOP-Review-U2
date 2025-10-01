@@ -60,7 +60,7 @@ public class Controller {
                 String street = view.getStreetText();
                 String zipcode = view.getZipCodeText();
                 String city = view.getCityText();
-                
+
                 Object item = view.getCountriesItem(); //get the item chosen in the drop-down list of countries, the program handles this as just an Object-object
                 Countries country = (Countries) item; //make it a Countries object - we know that this is supposed to be that, this type of type conversion can be risky
 

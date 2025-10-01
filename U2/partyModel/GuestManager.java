@@ -135,7 +135,7 @@ public class GuestManager {
         guestList[i] = guestList[i+1];
       }
 
-    guestList[nbrOfGuests-1] = null;
+    guestList[nbrOfGuests-1] = null; //Skiten blir -1, fixa län
   }
 
   private void increaseGuestList(){
