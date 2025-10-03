@@ -10,11 +10,16 @@ public class MainProgram
         int maxNbrOfGuests = 0;
 
         do {
-
             try {
                 String maxNbrOfGuestsString = JOptionPane.showInputDialog(null, "How many guests will attend?");
+
+                if(maxNbrOfGuestsString == null){
+                    System.exit(0);
+                }
+
                 maxNbrOfGuests = Integer.parseInt(maxNbrOfGuestsString);
                 rightFormat = true;
+
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null,"You need to enter a number!");
             }
