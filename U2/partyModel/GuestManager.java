@@ -27,12 +27,22 @@ public class GuestManager {
   public GuestManager(int maxNbrOfGuests){
     boolean done = false;
 
-    if (maxNbrOfGuests <= 0){
+    while (maxNbrOfGuests <= 0){
       while (!done){
         JOptionPane.showMessageDialog(null, "You need to enter a number higher than 0!");
         try {
           String maxNbrOfGuestsString = JOptionPane.showInputDialog(null, "Enter the number of guests that shall attend");
+
+          if(maxNbrOfGuestsString == null){
+            System.exit(0);
+          }
+
           maxNbrOfGuests = Integer.parseInt(maxNbrOfGuestsString);
+
+          if (maxNbrOfGuests == 0){
+            break;
+          }
+
         } catch (NumberFormatException e) {
           JOptionPane.showMessageDialog(null, "Enter a NUMBER higher than 0!");
           break;
