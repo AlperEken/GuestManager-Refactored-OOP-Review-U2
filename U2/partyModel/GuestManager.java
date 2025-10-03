@@ -113,13 +113,16 @@ public class GuestManager {
      within the array, however not necessary when last in array. Update the number of guests!
    */
   public void removeGuest(int index){
-    guestList[index] = null;
 
-    nbrOfGuests--;
-
-    if (index != controller.getMaxGuestsNumber()-1){
-      moveElementsToLeft(index);
+    if (index < 0 || index >= nbrOfGuests){
+      JOptionPane.showMessageDialog(null, "Invalid index!");
+      return;
     }
+
+    moveElementsToLeft(index);
+    nbrOfGuests--;
+    guestList[nbrOfGuests] = null;
+
   }
 
   private void moveElementsToLeft(int index){
@@ -134,8 +137,6 @@ public class GuestManager {
     for (int i = index; i < nbrOfGuests-1; i++){
         guestList[i] = guestList[i+1];
       }
-
-    guestList[nbrOfGuests-1] = null; //Skiten blir -1, fixa län
   }
 
   private void increaseGuestList(){
@@ -192,7 +193,11 @@ public class GuestManager {
     String[] infoStrings = new String[nbrOfGuests];
 
     for(int i = 0; i < nbrOfGuests; i++){
+      if (guestList[i] != null){
         infoStrings[i] = guestList[i].toString();
+      } else {
+        infoStrings[i] = "";
+      }
     }
       return infoStrings;
   }

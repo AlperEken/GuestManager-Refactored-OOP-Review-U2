@@ -92,9 +92,9 @@ public class Controller {
 
             case Delete:
                 JOptionPane.showMessageDialog(null, "Pressed Delete"); //remove this line later when you understand how the code works
-                index = view.getListIndex();
-                System.out.println("When pressed delete we got index: " + ++index); //Can be removed later
-                if (validateIndex(--index)) {
+                index = view.getListIndex(); //3
+                System.out.println("When pressed delete we got index: " + 1+index); //Can be removed later
+                if (validateIndex(index)) {
 
                     register.removeGuest(index);
 
@@ -129,7 +129,7 @@ public class Controller {
        with information from the selected guest.
      */
     private void updateView(int index) {
-        System.out.println("Called updateView in controller with index:"+index); //Can be removed later
+        System.out.println("Called updateView in controller with index:"+ index); //Can be removed later
         if(validateIndex(index)) {
             Guest guest = new Guest(); //Remove later when line below is used
             //Guest guest = register.getGuestAt(index); //ADD CODE HERE by activating this line to see what happens with a null-object and later when method getGuestAt is implemented in class GuestManager
