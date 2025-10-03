@@ -173,7 +173,11 @@ public class GuestManager {
        on other classes for this, so sometimes we write redundant
        error handling in different ways to have more robust classes or code.
      */
-    return null;
+
+    if (index < 0 || index >= nbrOfGuests){
+      return null;
+    }
+    return guestList[index];
   }
 
   public String[] getInfoStrings() { // Färdig implementerad metod!
