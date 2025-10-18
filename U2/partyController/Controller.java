@@ -73,7 +73,7 @@ public class Controller {
                 JOptionPane.showMessageDialog(null, "Pressed Change"); //remove this line later when you understand how the code works
 
                 index = view.getListIndex(); //get the chosen index from the list of guest information from the GUI
-                System.out.println("Want to change guest at index: "+index+1); //Can be removed later
+                System.out.println("Want to change guest at index: "+(index+1)); //Can be removed later
                 if (validateIndex(index)) { //validateIndex is a private method in this class
                     Guest guestToChange = register.getGuestAt(index); //get what is hopefully the matching Guest-object to the one chosen one in the GUI
                     if (guestToChange != null){
