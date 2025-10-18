@@ -23,6 +23,8 @@ import javax.swing.*;
 public class Controller {
     MainFrame view; // the main association to the GUI from the controller-class, GUI classes are in package partyView
     GuestManager register;  //class GuestManager is in package partyModel
+    Guest guest;
+    Address address;
 
     int maxGuestsNumber; //The number of maximum number of guests that will attend.
 
@@ -84,6 +86,18 @@ public class Controller {
                            In the code above in the Add-choice of the switch-statement
                            you can see how to get the information from the GUI.
                          */
+
+                        guest.setFirstName(view.getFirstNameText());
+                        guest.setLastName(view.getLastNameText());
+                        guest.setAge(convertAge(view.getAgeText()));
+                        address.setStreet(view.getStreetText());
+                        address.setCity(view.getCityText());
+                        address.setZipcode(view.getZipCodeText());
+
+
+                        address.setCountry((Countries) view.getCountriesItem());
+
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Did not find match in list to change");
                     }
