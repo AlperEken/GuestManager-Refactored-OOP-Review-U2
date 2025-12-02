@@ -148,6 +148,6 @@ public class Guest {
      */
 
     public String toString(){
-        return "iGuest" + firstName + " " + lastName + " " + age + " " + address;
+        return  firstName + " " + lastName + " " + age + " " + address;
     }
 }
